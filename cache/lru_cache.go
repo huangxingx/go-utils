@@ -2,6 +2,9 @@ package cache
 
 import "fmt"
 
+// implement Cache interface
+var _ Cache = &lruCache{}
+
 type lruCache struct {
 	Cap    int //容量
 	Bucket map[string]*Node
@@ -48,8 +51,6 @@ func (l *lruCache) Put(key string, val interface{}) {
 	}
 	node := &Node{Key: key, Val: val}
 	l.addNode(node)
-	// put bucket
-	l.Bucket[key] = node
 	return
 }
 
@@ -57,7 +58,7 @@ func (l *lruCache) Put(key string, val interface{}) {
 func (l *lruCache) Print() {
 	root := l.Head
 	for root != nil {
-		fmt.Printf("current node key is[%+v],value is [%+v]\n", root.Key, root.Val)
+		fmt.Printf("current Node key is[%+v],value is [%+v]\n", root.Key, root.Val)
 		root = root.Next
 	}
 	return
@@ -85,6 +86,7 @@ func (l *lruCache) addNode(node *Node) {
 	return
 }
 
+//removeNode remove Node
 func (l *lruCache) removeNode(node *Node) {
 	if l.Tail == node {
 		l.Tail = l.Tail.Pre
@@ -99,6 +101,7 @@ func (l *lruCache) removeNode(node *Node) {
 	return
 }
 
+//refreshNode move Node to tail
 func (l *lruCache) refreshNode(node *Node) {
 	if l.Tail == node {
 		return
