@@ -49,12 +49,12 @@ func parseSuffixExpress(expressList []string) []string {
 	suffixExpressList := make([]string, 0, len(expressList))
 	stack := go_utils.NewStack()
 	for _, v := range expressList {
-		// 数字
+		// 字面量
 		if IsNum(v) {
 			suffixExpressList = append(suffixExpressList, v)
 			continue
 		}
-		// 符号
+		// v is op or var
 		switch v {
 		case "(":
 			stack.Push(v)
@@ -64,13 +64,23 @@ func parseSuffixExpress(expressList []string) []string {
 			}
 			stack.Pop() // 移除 (
 		default:
-			// 是否是关键字
+			// keyword
 			if isKeyWork(v) {
 				suffixExpressList = append(suffixExpressList, v)
 				continue
 			}
 
 		cc:
+			// check v is op?
+			currentOperate := operate.GetOperate(v)
+			if currentOperate == nil {
+				//panic(fmt.Sprintf("不支持操作符: %s", currentOperate))
+				// v is var
+				suffixExpressList = append(suffixExpressList, v)
+				break
+			}
+
+			// v is op
 			if stack.IsEmpty() || stack.Peek().(string) == "(" || stack.Peek().(string) == ")" {
 				stack.Push(v)
 				break
@@ -81,10 +91,7 @@ func parseSuffixExpress(expressList []string) []string {
 			if topOperate == nil {
 				panic(fmt.Sprintf("不支持操作符: %s", top))
 			}
-			currentOperate := operate.GetOperate(v)
-			if currentOperate == nil {
-				panic(fmt.Sprintf("不支持操作符: %s", currentOperate))
-			}
+
 			if currentOperate.GetPriority() > topOperate.GetPriority() {
 				stack.Push(v)
 				break

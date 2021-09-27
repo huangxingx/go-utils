@@ -8,6 +8,7 @@ import (
 func TestExpressExecute(t *testing.T) {
 	type args struct {
 		express string
+		param   map[string]interface{}
 	}
 	tests := []struct {
 		name string
@@ -40,11 +41,15 @@ func TestExpressExecute(t *testing.T) {
 		// mix
 		{name: "test_mix_1", args: args{express: "1+2*3-(4+5)+10/2+2"}, want: 5.0},
 		{name: "test_mix_2", args: args{express: "f or (1 and true)"}, want: true},
+
+		// --- 参数测试
+		// param
+		{name: "test_param_1", args: args{express: "a + 1", param: map[string]interface{}{"a": 1}}, want: 2.0},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			express := NewExpress(tt.args.express)
-			if got := express.Execute(nil); !reflect.DeepEqual(got, tt.want) {
+			if got := express.Execute(tt.args.param); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewExpress().Execute(nil) = %v, want %v", got, tt.want)
 			}
 		})

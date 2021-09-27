@@ -81,6 +81,7 @@ func (b baseOperate) GetPriority() int {
 	return b.priority
 }
 
+// todo reflect
 func ensureFloat64(s interface{}) float64 {
 	switch s.(type) {
 	case string:
@@ -92,6 +93,12 @@ func ensureFloat64(s interface{}) float64 {
 
 	case float64:
 		return s.(float64)
+	case int:
+		i := strconv.Itoa(s.(int))
+		return ensureFloat64(i)
+	case int32:
+		i := strconv.Itoa(int(s.(int32)))
+		return ensureFloat64(i)
 	}
 	panic("value format err")
 }

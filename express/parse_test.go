@@ -16,6 +16,11 @@ func Test_parse2mpn(t *testing.T) {
 	}{
 		{name: "test_1", args: args{"12+2"}, want: []string{"12", "+", "2"}},
 		{name: "test_2", args: args{"1.2+2"}, want: []string{"1.2", "+", "2"}},
+		{name: "test_3", args: args{"1.2+2+hello"}, want: []string{"1.2", "+", "2", "+", "hello"}},
+		{name: "test_4", args: args{"1.2+2+_hello"}, want: []string{"1.2", "+", "2", "+", "_hello"}},
+		{name: "test_5", args: args{"1.2+2+hello1"}, want: []string{"1.2", "+", "2", "+", "hello1"}},
+		{name: "test_6", args: args{"1.2+2+hello1_2"}, want: []string{"1.2", "+", "2", "+", "hello1_2"}},
+		{name: "test_7", args: args{"1.2+2+hello1_2-3"}, want: []string{"1.2", "+", "2", "+", "hello1_2", "-", "3"}},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

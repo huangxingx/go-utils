@@ -23,11 +23,22 @@ func (e *Express) Execute(param map[string]interface{}) interface{} {
 	suffixExpress := parseSuffixExpress(mpn)
 	stack := go_utils.NewStack()
 	for _, v := range suffixExpress {
+		// number or keywork
 		if IsNum(v) || isKeyWork(v) {
 			stack.Push(v)
 			continue
 		}
+		// op
 		iOperate := operate.GetOperate(v)
+		if iOperate == nil {
+			// var
+			value, ok := param[v]
+			if !ok {
+				panic(fmt.Sprintf("var %s not value", v))
+			}
+			stack.Push(value)
+			continue
+		}
 		v2 := stack.Pop()
 		v1 := stack.Pop()
 
