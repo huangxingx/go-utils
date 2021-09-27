@@ -9,7 +9,7 @@ func init() {
 	s.name = "or"
 	s.symbol = []string{"||", "or"}
 	s.regexMatch = "\\|\\||(?i:or)"
-	s.priority = LogicPriority
+	s.priority = LogicPriority1
 	s.execute = func(v1, v2 interface{}) interface{} {
 		return ensureBool(v1) || ensureBool(v2)
 	}

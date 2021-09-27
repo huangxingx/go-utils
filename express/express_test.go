@@ -29,6 +29,7 @@ func TestExpressExecute(t *testing.T) {
 		{name: "test_or_2", args: args{express: "1 or 0"}, want: true},
 		{name: "test_or_3", args: args{express: "0 or false"}, want: false},
 		{name: "test_or_4", args: args{express: "0 or f"}, want: false},
+		{name: "test_or_5", args: args{express: "1 or 0 and 0"}, want: true}, // and > or
 
 		// 减法
 		{name: "test_sub_1", args: args{express: "100-1-2"}, want: 97.0},

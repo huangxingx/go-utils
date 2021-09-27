@@ -7,8 +7,9 @@ import (
 
 const (
 	_              int = iota
-	LogicPriority      // 逻辑运算 and or
-	LogicPriority2     // 逻辑运算2 > < >= <= !
+	LogicPriority1     // 逻辑运算1 or
+	LogicPriority2     // 逻辑运算2 and
+	LogicPriority3     // 逻辑运算3 > < >= <= !
 	Arithmetic1        // 四则运算1 + -
 	Arithmetic2        // 四则运算2 * / %
 )
