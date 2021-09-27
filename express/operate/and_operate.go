@@ -10,7 +10,7 @@ func (a AndOperate) GetRegexMatch() string {
 }
 
 func (a AndOperate) GetPriority() int {
-	return 0
+	return LogicPriority
 }
 
 func (a AndOperate) GetOperateSymbol() []string {

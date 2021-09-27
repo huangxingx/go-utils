@@ -10,7 +10,7 @@ func (a MultiOperate) GetRegexMatch() string {
 }
 
 func (a MultiOperate) GetPriority() int {
-	return 2
+	return Arithmetic2
 }
 
 func (a MultiOperate) GetOperateSymbol() []string {

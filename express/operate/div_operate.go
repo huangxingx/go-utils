@@ -9,7 +9,7 @@ func init() {
 	s.name = "div"
 	s.symbol = []string{"/", "div"}
 	s.regexMatch = "\\/"
-	s.priority = 2
+	s.priority = Arithmetic2
 	s.execute = func(v1, v2 interface{}) interface{} {
 		return ensureFloat64(v1) / ensureFloat64(v2)
 	}

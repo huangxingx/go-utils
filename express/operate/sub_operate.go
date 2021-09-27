@@ -9,7 +9,7 @@ func init() {
 	s.name = "sub"
 	s.symbol = []string{"-", "sub"}
 	s.regexMatch = "\\-|(?i:sub)"
-	s.priority = 2
+	s.priority = Arithmetic1
 	s.execute = func(v1, v2 interface{}) interface{} {
 		return ensureFloat64(v1) - ensureFloat64(v2)
 	}

@@ -5,6 +5,14 @@ import (
 	"sync"
 )
 
+const (
+	_              int = iota
+	LogicPriority      // 逻辑运算 and or
+	LogicPriority2     // 逻辑运算2 > < >= <= !
+	Arithmetic1        // 四则运算1 + -
+	Arithmetic2        // 四则运算2 * / %
+)
+
 var globalOperateMap = map[string]IOperate{}
 
 type IOperate interface {

@@ -41,7 +41,7 @@ func genCompileByOperate() string {
 func parse2mpn(express string) []string {
 	compileByKeyWork := genCompileByKeyWork()
 	compileByOperateSymbol := genCompileByOperate()
-	compile := regexp.MustCompile("\\(|\\)|\\d+|\\w+|" + compileByKeyWork + "|" + compileByOperateSymbol)
+	compile := regexp.MustCompile("\\(|\\)|\\d+\\.?\\d+|\\w+|" + compileByKeyWork + "|" + compileByOperateSymbol)
 	return compile.FindAllString(express, -1)
 }
 
@@ -86,7 +86,7 @@ func parseSuffixExpress(expressList []string) []string {
 				panic(fmt.Sprintf("不支持操作符: %s", currentOperate))
 			}
 			if currentOperate.GetPriority() > topOperate.GetPriority() {
-				suffixExpressList = append(suffixExpressList, v)
+				stack.Push(v)
 				break
 			} else {
 				item := stack.Pop().(string)
