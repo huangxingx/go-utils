@@ -41,8 +41,8 @@ func Test_parseSuffixExpress(t *testing.T) {
 		want []string
 	}{
 		{name: "test_1", args: args{expressList: []string{"12", "+", "2"}}, want: []string{"12", "2", "+"}},
-		{name: "test_1", args: args{expressList: []string{"1", "+", "2", "*", "3"}}, want: []string{"1", "2", "3", "*", "+"}},
-		{name: "test_1", args: args{expressList: []string{"1", "+", "2", "*", "3", "/", "4"}},
+		{name: "test_2", args: args{expressList: []string{"1", "+", "2", "*", "3"}}, want: []string{"1", "2", "3", "*", "+"}},
+		{name: "test_3", args: args{expressList: []string{"1", "+", "2", "*", "3", "/", "4"}},
 			want: []string{"1", "2", "3", "*", "4", "/", "+"}},
 	}
 	for _, tt := range tests {

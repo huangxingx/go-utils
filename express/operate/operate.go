@@ -2,6 +2,7 @@ package operate
 
 import (
 	"strconv"
+	"strings"
 	"sync"
 )
 
@@ -37,7 +38,7 @@ func Register(name string, operate IOperate) {
 func GetOperate(symbol string) IOperate {
 	for _, iOperate := range globalOperateMap {
 		for _, v := range iOperate.GetOperateSymbol() {
-			if v == symbol {
+			if v == strings.ToLower(symbol) {
 				return iOperate
 			}
 		}

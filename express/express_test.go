@@ -42,6 +42,8 @@ func TestExpressExecute(t *testing.T) {
 		// mix
 		{name: "test_mix_1", args: args{express: "1+2*3-(4+5)+10/2+2"}, want: 5.0},
 		{name: "test_mix_2", args: args{express: "f or (1 and true)"}, want: true},
+		// keywork
+		{name: "test_keywork_upper", args: args{express: "f or (1 AND TRUE)"}, want: true},
 
 		// --- 参数测试
 		// param

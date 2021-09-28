@@ -13,7 +13,7 @@ var keyWork = []string{"true", "false", "t", "f", "null"}
 
 func isKeyWork(s string) bool {
 	for _, v := range keyWork {
-		if v == s {
+		if v == strings.ToLower(s) {
 			return true
 		}
 	}
